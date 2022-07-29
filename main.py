@@ -1,6 +1,9 @@
 import numpy as np
+import sys
+import matplotlib
 
-arr1 = [1,2,3]
-arr2 = [4,5,6]
+inputs = [1.2, 5.2, 4.5]
+weights = [3.1, 2.1, 9.0]
+bias = 3
 
-print(np.dot(arr1, arr2))
+output = inputs[0] * weights[0] + inputs[1] * weights[1] + inputs[2] * weights[2] + bias

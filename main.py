@@ -1,6 +1,8 @@
 import numpy as np
+
 from activation_functions import ReLU, Softmax
 from layers import Dense
+from loss_functions import Loss, CategoricalCrossentropy
 
 def create_data(instances, classes):    # Based on https://cs231n.github.io/neural-networks-case-study/ - Spiral Dataset
 
@@ -17,9 +19,28 @@ def create_data(instances, classes):    # Based on https://cs231n.github.io/neur
         y[ix] = class_number
     return X,y
 
+X, y = create_data(100, 3)
 
 def main():
-    pass
+    dense1 = Dense(2, 3)
+    activation1 = ReLU()
+
+    dense2 = Dense(3, 3)
+    activation2 = Softmax()
+
+    dense1.forward(X)
+    activation1.forward(dense1.output)
+
+    dense2.forward(activation1.output)
+    activation2.forward(dense2.output)
+
+    print(activation2.output[:5])
+
+    loss_function = CategoricalCrossentropy()
+    loss = loss_function.calculate(activation2.output, y)
+
+    print("Loss: ", loss)
+
 
 
 if __name__ == '__main__':

@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from layers import Dense
 from activation_functions import *
 from loss_functions import Loss, CategoricalCrossentropy
+from model import Model
 
 def create_data(instances, classes):    # Based on https://cs231n.github.io/neural-networks-case-study/ - Spiral Dataset
 
@@ -27,15 +28,13 @@ def main():
     # plt.scatter(X[:, 0], X[:, 1], c=y, s=40, cmap='brg')
     # plt.show()
 
-    layer1 = Dense(2, 3, activation=ReLU())
+    model = Model([
+        Dense(2, 3, Sigmoid()), 
+        Dense(3,3, Softmax()),
+    ])
 
-    layer2 = Dense(3,3, activation=Softmax())
-
-    layer1.forward(X)
-    layer2.forward(layer1.output)
-
-    print(layer2.output[:5])
-
+    output = model.forward(X)[:5]
+    print(f"Output: {output}")
 
 
 if __name__ == '__main__':

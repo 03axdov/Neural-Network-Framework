@@ -6,7 +6,7 @@ class ReLU:
 
 class Softmax:
     def forward(self, inputs):
-        exp_inputs = np.exp(inputs- np.max(inputs, axis=1, keepdims=True))
+        exp_inputs = np.exp(inputs - np.max(inputs, axis=1, keepdims=True))
         return exp_inputs / np.sum(exp_inputs, axis=1, keepdims=True)
 
 class Sigmoid:

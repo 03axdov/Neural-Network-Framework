@@ -1,7 +1,8 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
-from activation_functions import ReLU, Softmax
 from layers import Dense
+from activation_functions import *
 from loss_functions import Loss, CategoricalCrossentropy
 
 def create_data(instances, classes):    # Based on https://cs231n.github.io/neural-networks-case-study/ - Spiral Dataset
@@ -19,27 +20,21 @@ def create_data(instances, classes):    # Based on https://cs231n.github.io/neur
         y[ix] = class_number
     return X,y
 
-X, y = create_data(100, 3)
-
 def main():
-    dense1 = Dense(2, 3)
-    activation1 = ReLU()
 
-    dense2 = Dense(3, 3)
-    activation2 = Softmax()
+    X, y = create_data(100, 3)
 
-    dense1.forward(X)
-    activation1.forward(dense1.output)
+    # plt.scatter(X[:, 0], X[:, 1], c=y, s=40, cmap='brg')
+    # plt.show()
 
-    dense2.forward(activation1.output)
-    activation2.forward(dense2.output)
+    layer1 = Dense(2, 3, activation=ReLU())
 
-    print(activation2.output[:5])
+    layer2 = Dense(3,3, activation=Softmax())
 
-    loss_function = CategoricalCrossentropy()
-    loss = loss_function.calculate(activation2.output, y)
+    layer1.forward(X)
+    layer2.forward(layer1.output)
 
-    print("Loss: ", loss)
+    print(layer2.output[:5])
 
 
 

@@ -1,8 +1,10 @@
 import numpy as np
 
 class Model():
-    def __init__(self, layers):
+    def __init__(self, layers, learning_rate, loss_function):
         self.layers = layers
+        self.learning_rate = learning_rate
+        self.loss_function = loss_function
 
     def forward(self, inputs):
         current_output = inputs
@@ -11,8 +13,19 @@ class Model():
             if t == len(self.layers) - 1:
                 return current_output
 
-    def backward(self, X, y, output, loss):
-        output_layer = self.layers[-1]
-        output_layer.backward()
+    def one_hot(self, Y):
+        one_hot_y = np.zeros((Y.size, Y.max() + 1))
+        one_hot_y[np.arange(Y.size), Y] = 1
+        return one_hot_y.T
 
-        self.output_error = y - output
+    def fit(self, X, y, epochs=100, displayUpdate=100):
+        for epoch in np.arange(0, epochs):
+            for (x, target) in zip(X, y):
+                y_pred = self.fit_partial(x, target)
+            if epoch == 0 or (epoch + 1) % displayUpdate == 0: # First epoch and the specified one
+                loss = self.loss_function.forward(y_pred, y)
+                print(f"[INFO] epoch={epoch + 1}, loss={loss}")
+    
+    def fit_partial(self, x, target):
+        y_pred = 0
+        return y_pred

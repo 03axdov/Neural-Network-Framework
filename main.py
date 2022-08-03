@@ -31,10 +31,10 @@ def main():
     model = Model([
         Dense(2, 3, ReLU()), 
         Dense(3,3, Softmax())],
-        loss_function=CategoricalCrossentropy(),)
+        loss_function=CategoricalCrossentropy(),
+        learning_rate=0.01)
 
-    output = model.forward(X)[:5]
-    print(f"Output: {output}")
+    model.fit(X,y)
 
 
 if __name__ == '__main__':

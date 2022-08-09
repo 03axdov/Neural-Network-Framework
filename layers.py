@@ -14,7 +14,7 @@ class Layer:
         raise NotImplementedError
 
 
-class Linear(Layer):
+class Dense(Layer):
     def __init__(self, input_size: int, output_size: int):
         # Inputs: (batch_size, input_size)
         # Outputs: (batch_size, output_size)

@@ -10,7 +10,7 @@ class DataIterator:
         raise NotImplementedError
 
 
-class BatchIterator:
+class BatchIterator(DataIterator):
     def __init__(self, batch_size: int = 32, shuffle: bool = True) -> None:
         self.batch_size = batch_size
         self.shuffle = shuffle
@@ -23,4 +23,4 @@ class BatchIterator:
             end = start + self.batch_size
             batch_inputs = inputs[start:end]
             batch_targets = targets[start:end]
-            yield BATCH[batch_inputs, batch_targets]
+            yield BATCH(batch_inputs, batch_targets)

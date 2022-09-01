@@ -19,8 +19,8 @@ class Dense(Layer):
         # Inputs: (batch_size, input_size)
         # Outputs: (batch_size, output_size)
         super().__init__()
-        self.params["w"] = np.random.randn(input_size, output_size)
-        self.params["b"] = np.random.randn(output_size)
+        self.params["w"] = np.random.randn(input_size, output_size) * 0.01  # Too large weights will result in calculation on 'flat' parts of certain activation functions such as tanh
+        self.params["b"] = np.zeros(output_size)
 
     def forward(self, inputs:Tensor) -> Tensor:
         self.inputs = inputs
@@ -48,6 +48,8 @@ class Activation(Layer):
         return self.f_prime(self.inputs) * grad
 
 
+# Tanh
+
 def tanh(x: Tensor) -> Tensor:
     return np.tanh(x)
 
@@ -55,7 +57,19 @@ def tanh_prime(x: Tensor) -> Tensor:
     y = tanh(x)
     return 1 - y**2
 
-
 class Tanh(Activation):
     def __init__(self):
         super().__init__(tanh, tanh_prime)
+
+
+# ReLU
+
+def relu(x: Tensor) -> Tensor:
+    return np.maximum(x, 0)
+
+def relu_prime(x: Tensor) -> Tensor:
+    return (x > 0) * 1
+
+class ReLU(Activation):
+    def __init__(self):
+        super().__init__(relu, relu_prime)

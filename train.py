@@ -1,8 +1,9 @@
 from tensor import Tensor
 from model import Model
-from loss_function import Loss, TSE
-from optimizer import Optimizer, SGD
+from loss_functions import Loss, TSE
+from optimizers import Optimizer, SGD
 from data import DataIterator, BatchIterator
+import time
 
 def train(model: Model,
           inputs: Tensor,
@@ -11,6 +12,7 @@ def train(model: Model,
           iterator: DataIterator = BatchIterator(),
           loss: Loss = TSE(),
           optimizer: Optimizer = SGD()) -> None:
+    tic = time.time()
     for epoch in range(epochs):
         epoch_loss = 0.0
         for batch in iterator(inputs, targets):
@@ -21,3 +23,7 @@ def train(model: Model,
             optimizer.step(model)
 
         print(f"Epoch: {epoch}, Loss: {epoch_loss}")
+    toc = time.time()
+    print("")
+    print(f"[ FINISHED TRAINING IN: {round(toc-tic, 2)} SECONDS ]")
+    print("")

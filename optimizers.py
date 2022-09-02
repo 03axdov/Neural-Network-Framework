@@ -7,6 +7,8 @@ class Optimizer:
         raise NotImplementedError
 
 
+# Stochastic Gradient Descent
+
 class SGD(Optimizer):
     def __init__(self, lr: float = 0.01) -> None:
         self.lr = lr

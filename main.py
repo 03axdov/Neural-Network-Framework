@@ -2,9 +2,10 @@ import numpy as np
 
 from train import train
 from model import Model
-from layers import Dense, Tanh, ReLU
+from layers import Dense
+from activation_functions import Tanh, ReLU
 from typing import List
-from optimizer import SGD
+from optimizers import SGD
 
 def main():
     def fizz_buzz_encode(x: int) -> List[int]:
@@ -17,15 +18,12 @@ def main():
         else:
             return [1,0,0,0]
 
-    def binary_encode(x:int) -> List[int]:
-        return [x >> i & 1 for i in range(10)]
-
-    inputs = np.array([binary_encode(x) for x in range(101, 1024)])
+    inputs = np.array([[x] for x in range(101, 1024)])
 
     targets = np.array([fizz_buzz_encode(x) for x in range(101, 1024)])
 
     model = Model([
-        Dense(input_size=10, output_size=50),
+        Dense(input_size=1, output_size=50),
         ReLU(),
         Dense(input_size=50, output_size=4)
     ])
@@ -34,7 +32,7 @@ def main():
 
     accuracy = 0
     for x in range(1, 101):
-        predicted = model.forward(binary_encode(x))
+        predicted = model.forward([x])
         predicted_idx = np.argmax(predicted)
         actual_idx = np.argmax(fizz_buzz_encode(x))
         if predicted_idx == actual_idx: accuracy += 1

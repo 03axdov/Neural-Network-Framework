@@ -8,7 +8,10 @@ While the framework is currently functional it is not done. There are several im
 - Saving model parameters and initializing these later on
 - Additional functionality for working with databases
 
-If you want to run the repository, run "pip install -r requirements.txt" and write your code in main.py. An example of a model built for the fizzbuzz problem is currently given. If a number is divisible by 3 it should return 'fizz', if the number is divisble by 5 it should return 'buzz' and if it's divisble by 15, 'fizzbuzz'.
+```
+pip install -r requirements.txt
+```
+Alternatively just pip install numpy as that is the only external package used.
 
 Current syntax:
 ```python

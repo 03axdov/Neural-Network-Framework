@@ -36,3 +36,5 @@ train(model, inputs, targets, epochs=50, optimizer=SGD(lr=0.001), loss=TSE()) # 
 # Make predictions
 predictions = model.forward(instance)
 ```
+
+The theory behind neural networks as well as certain naming decisions is derived from <a href="https://www.youtube.com/c/Deeplearningai">Andrew Ng</a>, co-founder and head of Google Brain and former chief scientist at Baidu.

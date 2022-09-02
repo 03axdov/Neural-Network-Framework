@@ -3,16 +3,22 @@ from model import Model
 
 
 class Optimizer:
-    def step(self, model: Model) -> None:
+    def step(self, model: Model) -> None: # Update params
         raise NotImplementedError
 
 
-# Stochastic Gradient Descent
-
 class SGD(Optimizer):
-    def __init__(self, lr: float = 0.01) -> None:
+    def __init__(self, lr: float = 0.001) -> None:   # learning rate = 0.001
         self.lr = lr
 
     def step(self, model: Model) -> None:
         for param, grad in model.params_and_grads():
             param -= self.lr * grad
+
+
+class Adam(Optimizer):
+    def __init__(self, lr: float = 0.001) -> None:
+        self.lr = lr
+
+    def step(self, model: Model) -> None:
+        pass

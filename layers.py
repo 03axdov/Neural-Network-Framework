@@ -19,15 +19,14 @@ class Dense(Layer):
         # Inputs: (batch_size, input_size)
         # Outputs: (batch_size, output_size)
         super().__init__()
-        self.params["w"] = np.random.randn(input_size, output_size) * 0.01
-        self.params["b"] = np.zeros(output_size)
-        self.input_size = input_size
+        self.params["w"] = np.random.randn(input_size, output_size) * 0.01  # Initialize weights
+        self.params["b"] = np.zeros(output_size)    # Initialize biases
 
     def forward(self, inputs:Tensor) -> Tensor:
-        self.inputs = inputs
+        self.inputs = inputs    # Cache a[l-1]
         return inputs @ self.params["w"] + self.params["b"]
 
-    def backward(self, grad: Tensor) -> Tensor:
-        self.grads["b"] = np.sum(grad, axis=0)
-        self.grads["w"] = self.inputs.T @ grad
+    def backward(self, grad: Tensor) -> Tensor: # dZ[l] = dA[l] * g[l]'(Z[l]) --> See activation_functions.py
+        self.grads["b"] = np.sum(grad, axis=0)  # Bias gradients - np.sum(dZ[l], axis=0, keepdims=True) - For another implementation - Biases: column vector instead of row vector
+        self.grads["w"] = self.inputs.T @ grad  # dW[l] = (grad -->) dZ[l] * A[l-1].T (<-- self.inputs.T) - Could divide the result by m
         return grad @ self.params["w"].T

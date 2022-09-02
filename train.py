@@ -16,11 +16,11 @@ def train(model: Model,
     for epoch in range(epochs):
         epoch_loss = 0.0
         for batch in iterator(inputs, targets):
-            predicted = model.forward(batch.inputs)
+            predicted = model.forward(batch.inputs) # Compute y^
             epoch_loss += loss.loss(predicted, batch.targets)
-            grad = loss.grad(predicted, batch.targets)
-            model.backward(grad)
-            optimizer.step(model)
+            grad = loss.grad(predicted, batch.targets) # Compute da[l]
+            model.backward(grad) # Use da[l] to get dW[l-1], db[l-1], dW[l-2] etc.
+            optimizer.step(model) # Update weights and biases according to the previously calculated gradients
 
         print(f"Epoch: {epoch}, Loss: {epoch_loss}")
     toc = time.time()

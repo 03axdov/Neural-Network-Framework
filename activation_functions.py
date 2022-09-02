@@ -13,11 +13,11 @@ class Activation(Layer):
         self.f_prime = f_prime
 
     def forward(self, inputs: Tensor) -> Tensor:
-        self.inputs = inputs
+        self.inputs = inputs    # Cache Z[l]
         return self.f(inputs)
 
     def backward(self, grad: Tensor) -> Tensor:
-        return self.f_prime(self.inputs) * grad
+        return self.f_prime(self.inputs) * grad # dZ[l] = dA[l] * g[l]'(Z[l])
 
 
 class Tanh(Activation):
@@ -42,3 +42,25 @@ class ReLU(Activation):
 
     def __init__(self):
         super().__init__(self.relu, self.relu_prime)
+
+
+class Softmax(Activation):
+    def softmax(self, x: Tensor) -> Tensor:
+        return
+
+    def softmax_prime(self, x: Tensor) -> Tensor:
+        return
+
+    def __init__(self):
+        super().__init__(self.softmax, self.softmax_prime)
+
+
+class Sigmoid(Activation):
+    def sigmoid(self, x: Tensor) -> Tensor:
+        return 1 / (1 + np.exp(-x))
+
+    def sigmoid_prime(self, x: Tensor) -> Tensor:
+        return np.exp(-x) / (1 + np.exp(-x))**2
+
+    def __init__(self):
+        super().__init__(self.sigmoid, self.sigmoid_prime)

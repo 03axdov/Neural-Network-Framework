@@ -19,11 +19,11 @@ from layers import *
 from activation_functions import *
 from optimizers import *
 
-inputs = np.array([<individual input length>] * your input length)
+inputs = np.array([<individual input>] * your input length)
 targets = np.array([<one hot encoded targets>] * your input length)
 
 model = Model([
-  Dense(input_size=<individual input length>, output_size=50) # The output size can be whatever you want
+  Dense(input_size=len(<individual input>), output_size=50) # The output size can be whatever you want
   ReLU(),
   ... # Hidden Layers
   Dense(input_size=50, output_size=<number of targets>)

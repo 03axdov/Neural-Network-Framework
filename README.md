@@ -1,7 +1,7 @@
 # Neural-Network-Framework
 A Neural Network framework, built with Python and Numpy.
 
-While the framework is currently functional it is not done. There are several improvements that can be addressed:
+While the framework is currently functional it is not done. There are several improvements that can be made:
 - More optimizers, activation functions etc.
 - More layers, such as Conv2D and other convolutional layers
 - Training on GPU's

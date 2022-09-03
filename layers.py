@@ -21,6 +21,7 @@ class Dense(Layer):
         super().__init__()
         self.params["w"] = np.random.randn(input_size, output_size) * 0.01  # Initialize weights
         self.params["b"] = np.zeros(output_size)    # Initialize biases
+        self.inputs = np.array([])
 
     def forward(self, inputs:Tensor) -> Tensor:
         self.inputs = inputs    # Cache a[l-1]

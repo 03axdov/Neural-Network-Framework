@@ -6,10 +6,17 @@ from typing import Sequence, Iterator, Tuple
 class Model:
     def __init__(self, layers: Sequence[Layer]) -> None:
         self.layers = layers # Activation functions count as layers
+        self.weights = []
 
     def forward(self, inputs: Tensor) -> Tensor: # Calculate y^
+        self.weights = []    # As to prevent large matrixes between epochs
+        print(f"[ INPUTS : {inputs.shape} ]")
         for layer in self.layers:
             inputs = layer.forward(inputs)
+            try:    # W - The weight matrix will be used by the loss function for regularization
+                self.weights.append(layer.params['w'])
+            except KeyError:    # Is an activation layer without weights
+                continue
         return inputs
 
     def backward(self, grad: Tensor) -> Tensor: # Calculate gradients

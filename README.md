@@ -22,6 +22,7 @@ from layers import *
 from activation_functions import *
 from optimizers import *
 from loss import *
+from data import *
 
 inputs = np.array([<individual input>] * your input length)
 targets = np.array([<one hot encoded targets>] * your input length)
@@ -34,7 +35,7 @@ model = Model([
 ])
 
 # Train the model
-train(model, inputs, targets, epochs=50, optimizer=SGD(lr=0.001), loss=TSE()) # The epochs, loss_function and optimizer can be whatever
+train(model, inputs, targets, epochs=50, optimizer=SGD(lr=0.001), iterator=BatchIterator(batch_size=32), loss=TSE()) # Parameters can, of course, be customized
 
 # Make predictions
 predictions = model.forward(instance)

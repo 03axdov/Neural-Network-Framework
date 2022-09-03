@@ -11,7 +11,7 @@ While the framework is currently functional it is not done. There are several im
 ```
 pip install -r requirements.txt
 ```
-Alternatively just pip install numpy as that is the only external package used.
+Alternatively just pip install numpy as that is the only external package used. Note that tensorflow is used in main.py, however only as a means of testing models on keras datasets.
 
 Current syntax:
 ```python

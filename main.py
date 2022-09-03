@@ -26,13 +26,7 @@ def main():
         Dense(input_size=50, output_size=1),
     ])
 
-    train(model, x_train, y_train, epochs=50, iterator=BatchIterator(batch_size=64), optimizer=SGD(lr=0.001))
-
-    for x, y in zip(x_test, y_test):
-        predicted = model.forward([x])
-        print(f"[ PREDICTED : {predicted} ]")
-        print(f"[ ACTUAL : {y} ]")
-
+    train(model, x_train, y_train, epochs=50, iterator=BatchIterator(batch_size=64), optimizer=SGD(lr=0.1))
 
 if __name__ == "__main__":
     main()

@@ -1,5 +1,6 @@
 from tensor import Tensor
 from model import Model
+import sys
 
 
 class Optimizer:
@@ -8,8 +9,9 @@ class Optimizer:
 
 
 class SGD(Optimizer):
-    def __init__(self, lr: float = 0.001) -> None:   # learning rate = 0.001
+    def __init__(self, lr: float = 0.001, lambd = 0) -> None:   # learning rate = 0.001, lambd --> lambda for regularization
         self.lr = lr
+        self.lambd = lambd
 
     def step(self, model: Model) -> None:
         for param, grad in model.params_and_grads():

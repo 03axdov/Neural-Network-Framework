@@ -9,8 +9,7 @@ class Model:
         self.weights = []
 
     def forward(self, inputs: Tensor) -> Tensor: # Calculate y^
-        self.weights = []    # As to prevent large matrixes between epochs
-        print(f"[ INPUTS : {inputs.shape} ]")
+        self.weights = []    # As to prevent large matrixes between epochs'
         for layer in self.layers:
             inputs = layer.forward(inputs)
             try:    # W - The weight matrix will be used by the loss function for regularization

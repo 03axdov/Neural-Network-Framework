@@ -1,5 +1,6 @@
 import numpy as np
 from tensor import Tensor
+import sys
 
 class Loss: # Effectively Cost Functions as they apply to batches
     def loss(self, predicted: Tensor, actual: Tensor) -> float: # Calculate loss
@@ -10,21 +11,19 @@ class Loss: # Effectively Cost Functions as they apply to batches
 
 
 class TSE(Loss):
-    def __init__(self, regularization_lambda=0):
-        self.regularization_lambda = regularization_lambda
+    def __init__(self, batch_size):
+        self.batch_size = batch_size
 
     def loss(self, predicted: Tensor, actual: Tensor) -> float:
         actual = np.expand_dims(actual, axis=1) # Required else cost will be of shape (batch_size, batch_size)
-        return np.sum((predicted - actual) ** 2)
+        return np.sum((predicted - actual) ** 2) / self.batch_size
 
-    def grad(self, predicted: Tensor, actual: Tensor, weights: Tensor) -> Tensor:
+    def grad(self, predicted: Tensor, actual: Tensor) -> Tensor:
         actual = np.expand_dims(actual, axis=1) # Required else cost will be of shape (batch_size, batch_size)
-        return 2 * (predicted - actual) + self.regularization_lambda
+        return 2 * (predicted - actual)
 
 
 class CategoricalCrossentropy(Loss):
-    def __init__(self, regularization_lambda=0):
-        self.regularization_lambda = regularization_lambda
 
     def loss(self, predicted: Tensor, actual: Tensor) -> float:
         pass
@@ -34,8 +33,6 @@ class CategoricalCrossentropy(Loss):
 
 
 class BinaryCrossentropy(Loss):
-    def __init__(self, regularization_lambda=0):
-        self.regularization_lambda = regularization_lambda
 
     def loss(self, predicted: Tensor, actual: Tensor) -> float:
         actual = np.expand_dims(actual, axis=1) # Required else cost will be of shape (batch_size, batch_size)
@@ -43,12 +40,10 @@ class BinaryCrossentropy(Loss):
 
     def grad(self, predicted: Tensor, actual: Tensor, weights: Tensor) -> Tensor:
         actual = np.expand_dims(actual, axis=1) # Required else cost will be of shape (batch_size, batch_size)
-        return (-predicted/actual) + (1-predicted) / (1-actual) + self.regularization_lambda
+        return (-predicted/actual) + (1-predicted) / (1-actual)
 
 
 class Logistic(Loss):
-    def __init__(self, regularization_lambda=0):
-        self.regularization_lambda = regularization_lambda
 
     def loss(self, predicted: Tensor, actual: Tensor) -> float:
         actual = np.expand_dims(actual, axis=1) # Required else cost will be of shape (batch_size, batch_size)
@@ -56,4 +51,4 @@ class Logistic(Loss):
 
     def grad(self, predicted: Tensor, actual: Tensor, weights: Tensor) -> Tensor:
         actual = np.expand_dims(actual, axis=1) # Required else cost will be of shape (batch_size, batch_size)
-        return (-predicted/actual) + (1-predicted) / (1-actual) + self.regularization_lambda
+        return (-predicted/actual) + (1-predicted) / (1-actual)

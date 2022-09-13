@@ -42,3 +42,5 @@ predictions = model.forward(instance)
 ```
 
 The theory behind neural networks as well as certain naming decisions is derived from <a href="https://www.youtube.com/c/Deeplearningai">Andrew Ng</a>, co-founder and head of Google Brain and former chief scientist at Baidu.
+
+// Current version encountering problems with optimization for certain optimizers / activation layers.

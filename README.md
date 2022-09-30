@@ -44,5 +44,3 @@ predictions = model.forward(instance)
 See 'activation_functions.py', 'layers.py' etc. to browse which algorithms are currently implemented.
 
 The theory behind neural networks as well as certain naming conventions is derived from <a href="https://www.youtube.com/c/Deeplearningai">Andrew Ng</a>, co-founder and head of Google Brain and former chief scientist at Baidu.
-
-// Current version encountering problems with optimization for certain optimizers / activation layers.

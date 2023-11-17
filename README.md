@@ -1,7 +1,7 @@
 # Neural-Network-Framework
 > A Neural Network framework, built with Python and Numpy. Currently working on another framework called Musky, specifically for Computer Vision. 
 
-While the framework is currently functional it is not done. There are several improvements that can be made:
+Some improvements that can be made:
 - More optimizers, activation functions etc.
 - More layers, such as Conv2D and other convolutional layers
 - Training on GPU's

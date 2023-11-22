@@ -1,5 +1,5 @@
 # Neural-Network-Framework
-> A Neural Network framework, built with Python and Numpy. Currently working on another framework called Muskie, specifically for Computer Vision. This framework is quite prone to exploding gradients (i.e. gradients whose values move towards infinity, thus 'destoroying' the network), so appropriate models should be constructed.
+> A Neural Network framework, built with Python and Numpy. Currently working on another framework called Muskie, specifically for Computer Vision. This framework is quite prone to exploding gradients (i.e. gradients whose values move towards infinity, thus 'destroying' the network), so appropriate models should be constructed.
 
 Some improvements that can be made:
 - More optimizers, activation functions etc.
